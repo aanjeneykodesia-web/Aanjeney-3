@@ -1,9 +1,7 @@
-name: Android CI
+name: Android APK Build
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -11,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up JDK 17
@@ -20,14 +18,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Grant execute permission to gradlew
-        run: chmod +x gradlew
-
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Fix gradlew permission and build
+        run: |
+          ls -l gradlew
+          chmod +x gradlew
+          ls -l gradlew
+          ./gradlew assembleDebug
