@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: FINAL_ANDROID_APP_FULL   # 👈 IMPORTANT FIX
+        working-directory: FINAL_ANDROID_APP_FULL
 
     steps:
       - uses: actions/checkout@v4
@@ -26,9 +26,6 @@ jobs:
 
       - name: Build Release
         run: ./gradlew clean assembleRelease
-
-      - name: List outputs (debug)
-        run: ls -R app/build/outputs
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
