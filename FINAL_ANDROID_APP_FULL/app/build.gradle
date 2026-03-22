@@ -1,1 +1,29 @@
-plugins { id 'com.android.application' }
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.production.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.production.app"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        debug {
+        }
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+}
+
+dependencies {
+    // keep your existing dependencies here
+}
