@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: FINAL_ANDROID_APP_FULL   # 👈 IMPORTANT FIX
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,12 +25,13 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Release
-        run: ./gradlew assembleRelease
+        run: ./gradlew clean assembleRelease
 
-      - name: Upload Build Files
+      - name: List outputs (debug)
+        run: ls -R app/build/outputs
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: |
-            app/build/outputs/apk/release/*.apk
-            app/build/outputs/bundle/release/*.aab
+          path: FINAL_ANDROID_APP_FULL/app/build/outputs/apk/release/*.apk
